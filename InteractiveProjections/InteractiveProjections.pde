@@ -1,78 +1,39 @@
-float depth = 2000;
-
 void settings() {
-  size (500, 500, P3D);
-}
-void setup() {
-    noStroke();
+  size(500, 500, P2D);
 }
 
-int scale = 1;
-float angleX = 0;
-float angleY = 0;
+void setup() {
+}
+
+float moveX = 0, moveY = 0;
+int boxSize = 50;
 
 void draw() {
-  background(200);
-  directionalLight(50,100,125,0,-1,0);
-  camera(width/2, height/2, depth,250,250,0,0,1,0);
-  ambientLight(102,102,102);
-  translate(width/2, height/2, 0);
-  float rz = map(mouseY,0, height, 0 ,PI);
-  float ry = map(mouseX, 0, width, 0, PI);
-  rotateZ(rz);
-  rotateY(ry);
-  for (int x = -2; x <= 2; x++) {
-    for (int y = -2; y <= 2; y++) {
-      for (int z = -2; z <= 2; z++) {
-        pushMatrix();
-        translate(100 * x, 100 * y, -100 * z);
-        box(50);
-        popMatrix();
+  background(150, 75, 100);
+  My3DPoint eye = new My3DPoint(0, 0, -5000);
+  My3DPoint origin = new My3DPoint(0, 0, 0);
+  My3DBox input3DBox = new My3DBox(origin, boxSize, boxSize, boxSize);
+  
+  translate(width/2f - boxSize/2f, height/2f - boxSize/2f);
+  float[][] transform = multiplyMatrix(rotateXMatrix(moveX), rotateYMatrix(moveY));
+  input3DBox = transformBox(input3DBox, transform);
+  projectBox(eye, input3DBox).render();
+
+}
+
+void keyPressed(){
+   if(key == CODED){
+      if(keyCode == UP){
+        moveX += PI/12;
+      } else if(keyCode == DOWN){
+        moveX -= PI/12;
+      } else if(keyCode == LEFT){
+        moveY += PI/12;
+      } else if(keyCode == RIGHT){
+        moveY -= PI/12;
       }
-    }
-  }
-  /*box(100, 80, 60);
-  translate(100, 0, 0);
-  sphere(50);*/
+   }
 }
-
-void mouseDragged(){
-  if(mouseY > pmouseY){
-    scale = scale +1;
-  } else if (mouseY< pmouseY) {
-    if(scale - 1 <0) {
-      scale = 0;
-    } else {
-    scale = scale -1;
-    }
-  }
-}
-
-void keyPressed() {
-  if (key == CODED) {
-    if (keyCode == UP) {
-      depth -= 50;
-    }
-    else if (keyCode == DOWN) {
-      depth += 50;
-    }
-  }
-}
-
-/*void keyPressed(){
-  if(key == CODED){
-    if(keyCode == UP){
-      angleX = (angleX + PI/8) % (2*PI);
-    } else if(keyCode == DOWN) {
-      angleX = (angleX - PI/8) % (2*PI);
-    } else if(keyCode == RIGHT) {
-      angleY = (angleY + PI/8) % (2*PI);
-    } else if (keyCode == LEFT) {
-      angleY = (angleY - PI/8) % (2*PI);
-    }
-  }
-}*/
-
 class My2DPoint {
   float x;
   float y;
@@ -139,6 +100,9 @@ class My2DBox {
   }
   void render(){
     // Complete the code! use only line(x1, y1, x2, y2) built-in function.
+    strokeWeight(5);
+    strokeJoin(ROUND);
+    stroke(220, 150, 60);
     line(s[0].x, s[0].y, s[1].x, s[1].y);
     line(s[1].x, s[1].y, s[2].x, s[2].y);
     line(s[2].x, s[2].y, s[3].x, s[3].y);
