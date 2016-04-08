@@ -16,7 +16,6 @@ void mouseDragged(){
 
 void mouseWheel(MouseEvent event) {
   change += event.getCount();
-  change = change*0.2;
   if(change > 1.5) {
      change = 1.5;
   } else if (change < 0.2){
