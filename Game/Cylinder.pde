@@ -1,13 +1,14 @@
+/* Classe de représentation d'un cylindre*/
 class Cylinder{
 
-static final float cylinderBaseSize = 8;
-static final float cylinderHeight = 25;
-static final int cylinderResolution = 8;
+static final float cylinderBaseSize = 8; //Rayon d'un cylindre
+static final float cylinderHeight = 25;  
+static final int cylinderResolution = 8; //Précision du dessin d'un cylindre
 PShape openCylinder;
 PShape closeBottom;
 PShape closeUp;
 
-
+/* Construction d'un cylindre */
 Cylinder(){
   openCylinder = new PShape();
   closeBottom = new PShape();
@@ -52,6 +53,7 @@ Cylinder(){
   closeUp.endShape();
 }
 
+/* Méthode d'affichage du cylindre sur la plaque */
 void display(float x, float y, float z){
   pushMatrix();
   translate(x, y, z);

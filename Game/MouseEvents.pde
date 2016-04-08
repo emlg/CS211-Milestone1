@@ -1,3 +1,7 @@
+
+float change = 1; //facteur de changement de la vitesse de rotation
+
+/* Méthode qui change l'angle de la plaque selon la position de la souris (lors d'un clic gauche de la souris)  */
 void mouseDragged(){
    valueZ += (mouseX- pmouseX) *change;
    valueX += (mouseY- pmouseY) *change;
@@ -14,6 +18,7 @@ void mouseDragged(){
   angleZ = map(valueZ, 0 , width, -PI/6, PI/6);
 }
 
+/* Méthode qui fait varier la variable change selon la roue de la souris  */
 void mouseWheel(MouseEvent event) {
   change += event.getCount();
   change = change*0.2;
@@ -25,6 +30,7 @@ void mouseWheel(MouseEvent event) {
   println(change);
 }
 
+/* Méthode d'ajout d'un cylindre sur la plaque lors d'un clic de souris, si la plaque est shiftée */
 void mouseClicked(){
   if(shiftMode){
     PVector position = new PVector(mouseX, mouseY);

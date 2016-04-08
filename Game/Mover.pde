@@ -10,11 +10,13 @@ class Mover {
   float mu = 0.15;
   float frictionMagnitude = normalForce*mu;
   
+  /* Création d'un nouveau mover: la balle*/
   Mover() {
     location = new PVector(0, 0);
     velocity = new PVector(1, 1);
-    
   }
+  
+  /* Méthode de mise à jour de la gravité et de la friction selon la position de la plaque*/
   void update(float angleZ, float angleX) {
     gravity = new PVector(sin(angleZ)*gravityCst, -sin(angleX)*gravityCst);
     friction = velocity.copy();
@@ -22,8 +24,9 @@ class Mover {
     friction.normalize();
     friction.mult(frictionMagnitude);
     location.add(velocity.add(friction.add(gravity)));
-    
   }
+  
+  /* Méthode d'affichage de la balle */
   void display() {
     noStroke();
     fill(100,0,0);
@@ -34,6 +37,7 @@ class Mover {
     popMatrix();
   }
   
+  /* Méthode de vérification de la position de la balle par rapport aux bords de la plaque */
   void checkEdges() {
     if (location.x > boxX/2 - r/2) {
       location.x = boxX/2 -r/2;
@@ -53,6 +57,7 @@ class Mover {
     }
   }
   
+  /* Méthode de vérification de la position de la balle par rapport aux positions des cylindres */
   void checkCylinderCollision(){
     for(int i =0; i < cylinders.size(); i++){
       PVector tmpL = location.copy();
