@@ -10,7 +10,6 @@ float valueX;
 float valueZ;
 float angleX = 0;
 float angleZ = 0;
-float change = 1;
 Mover ball;
 boolean shiftMode = false;
 ArrayList<PVector> cylinders = new ArrayList<PVector>();
