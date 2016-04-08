@@ -14,9 +14,9 @@ void mouseDragged(){
   angleZ = map(valueZ, 0 , width, -PI/6, PI/6);
 }
 
+float change = 1;
 void mouseWheel(MouseEvent event) {
   change += event.getCount();
-  change = change*0.2;
   if(change > 1.5) {
      change = 1.5;
   } else if (change < 0.2){
