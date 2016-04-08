@@ -18,10 +18,13 @@ void mouseDragged(){
   angleZ = map(valueZ, 0 , width, -PI/6, PI/6);
 }
 
+<<<<<<< HEAD
 /* Méthode qui fait varier la variable change selon la roue de la souris  */
+=======
+float change = 1;
+>>>>>>> 55358d5203203d6945db9ead99ef5807a28ab019
 void mouseWheel(MouseEvent event) {
   change += event.getCount();
-  change = change*0.2;
   if(change > 1.5) {
      change = 1.5;
   } else if (change < 0.2){
